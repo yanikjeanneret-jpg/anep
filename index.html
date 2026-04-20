@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ANEP — Bientôt en ligne</title>
@@ -17,7 +17,7 @@
   .container {
     text-align: center;
     padding: 40px 20px;
-    max-width: 600px;
+    max-width: 650px;
   }
   .logo {
     font-size: 64px;
@@ -51,6 +51,50 @@
     line-height: 1.8;
     margin-bottom: 40px;
   }
+
+  /* Countdown */
+  .countdown-label {
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .countdown-block {
+    background: #1a3c6e;
+    color: white;
+    border-radius: 8px;
+    padding: 16px 20px;
+    min-width: 80px;
+  }
+  .countdown-block .number {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1;
+    display: block;
+  }
+  .countdown-block .unit {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: 6px;
+    display: block;
+  }
+  .countdown-done {
+    font-size: 18px;
+    color: #1a3c6e;
+    font-weight: 700;
+    margin-bottom: 48px;
+  }
+
   .email {
     display: inline-block;
     padding: 14px 32px;
@@ -81,8 +125,61 @@
     Nous travaillons à défendre la neutralité pédagogique dans l'enseignement public suisse.<br>
     Un site complet sera disponible très prochainement.
   </p>
+
+  <div class="countdown-label">Ouverture dans</div>
+  <div class="countdown" id="countdown">
+    <div class="countdown-block">
+      <span class="number" id="days">--</span>
+      <span class="unit">Jours</span>
+    </div>
+    <div class="countdown-block">
+      <span class="number" id="hours">--</span>
+      <span class="unit">Heures</span>
+    </div>
+    <div class="countdown-block">
+      <span class="number" id="minutes">--</span>
+      <span class="unit">Minutes</span>
+    </div>
+    <div class="countdown-block">
+      <span class="number" id="seconds">--</span>
+      <span class="unit">Secondes</span>
+    </div>
+  </div>
+
   <a class="email" href="mailto:contact@anep.ch">contact@anep.ch</a>
-  <div class="footer">Suisse · 2025</div>
+  <div class="footer">Suisse · 2026</div>
 </div>
-</body>
-</html>
+
+<script>
+  const target = new Date('2026-05-04T00:00:00');
+
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML =
+        '<div class="countdown-done">🎉 Le site est en ligne !</div>';
+      return;
+    }
+
+    const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent    = pad(days);
+    document.getElementById('hours').textContent   = pad(hours);
+    document.getElementById('minutes').textContent = pad(minutes);
+    document.getElementById('seconds').textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body></html>
