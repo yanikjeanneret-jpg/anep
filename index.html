@@ -107,6 +107,19 @@
     transition: background 0.2s;
   }
   .email:hover { background: #0f2548; }
+
+  @media (max-width: 480px) {
+    .logo { font-size: 42px; letter-spacing: 5px; }
+    .tagline { font-size: 11px; letter-spacing: 1px; margin-bottom: 40px; }
+    h1 { font-size: 22px; }
+    p { font-size: 14px; }
+    .container { padding: 30px 16px; }
+    .countdown { gap: 8px; }
+    .countdown-block { padding: 12px 10px; min-width: 0; flex: 1; }
+    .countdown-block .number { font-size: 26px; letter-spacing: 1px; }
+    .countdown-block .unit { font-size: 9px; letter-spacing: 1px; }
+    .email { padding: 12px 24px; font-size: 13px; width: 100%; text-align: center; }
+  }
   .footer {
     margin-top: 60px;
     font-size: 12px;
